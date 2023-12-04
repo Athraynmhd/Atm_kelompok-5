@@ -24,23 +24,3 @@ public class SetorUang extends Transaksi {
     public SetorUang(String norek){
         super(norek);
     }
-    
-    /**
-     * Method getter untuk mendapatkan nilai total transaksi berdasarkan jumlah setor
-     * @param jumlahsetor
-     * @return hasil
-     */
-    @Override
-    public int GetTotalTransaksi(int jumlahsetor){
-        //Memanggil method constructor tanpa parameter
-        Akun akun = new Akun();
-        akun.isiDataAkun(super.GetNorek());
-        
-        //Meng-convert ke dalam bentuk Integer
-        super.SetSaldo(Integer.parseInt(akun.getSaldo()));
-        
-        int hasil = super.GetSaldo()+jumlahsetor;
-        
-        return hasil;
-    }
-}
