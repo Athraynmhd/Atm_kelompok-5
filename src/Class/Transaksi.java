@@ -14,3 +14,10 @@ public abstract class Transaksi {
     private int saldo;
     private String norek;
     
+    /**
+     * Method constructor dengan parameter
+     * @param norek 
+     */
+    public Transaksi(String norek){
+        this.norek = norek;
+    }
