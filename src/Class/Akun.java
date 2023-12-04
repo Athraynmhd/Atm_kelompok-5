@@ -154,4 +154,26 @@ public void isiDataAkun(String norek){
             
         }
     }
-    
+
+     public void setHasil(String norek, int hasil) throws IOException{
+        String path = "DatabaseBank.txt";
+        String temp = "TempDatabase.txt";
+     
+        File fileAwal = new File(path);
+        File fileTemp = new File(temp);
+
+        FileWriter fw = new FileWriter(temp, true);
+        BufferedWriter bw = new BufferedWriter(fw);
+        
+        PrintWriter pw = new PrintWriter(bw);
+        
+        String noRek;
+        String pin;
+        String saldo;
+        String username;
+        String noHP;
+        String email;
+       
+        String saldoBaru = String.valueOf(hasil);
+
+     
