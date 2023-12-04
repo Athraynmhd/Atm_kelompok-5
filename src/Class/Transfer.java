@@ -28,5 +28,13 @@ public class Transfer extends Transaksi{
     public String getnorektujuan(){
         return this.norektujuan;
     }
-    
+     
+     /**
+      * Method getter untuk mendapatkan nilai total transaksi
+      * @param jumlah
+      * @return 0
+      */
+    public int GetTotalTransaksi(int jumlah){
+      return 0;
+    }
      
