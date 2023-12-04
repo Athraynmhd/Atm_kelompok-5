@@ -119,3 +119,39 @@ public class Akun
         temp.renameTo(file);
     }
 
+public void isiDataAkun(String norek){
+        String path = "DatabaseBank.txt";
+        try {
+  
+        File file = new File(path);
+        
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        
+        Scanner scan = new Scanner(new File(path));
+        scan.useDelimiter("[,\\n]");
+        
+
+        while(scan.hasNext())
+        {
+            this.noRek = scan.next();
+            if(this.noRek.equals(norek)){
+                this.pin = scan.next();
+                this.saldo = scan.next();
+                this.username = scan.next();
+                this.noHP = scan.next();
+                this.email = scan.next();
+            }else{
+                continue;
+            }
+        }
+      
+        bufferedReader.close();
+        scan.close();
+        fileReader.close();
+        }
+        catch (Exception e){
+            
+        }
+    }
+    
