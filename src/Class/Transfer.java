@@ -37,4 +37,19 @@ public class Transfer extends Transaksi{
     public int GetTotalTransaksi(int jumlah){
       return 0;
     }
+
+    public void Transfer(int jumlah){
+        //Memanggil method constructor tanpa parameter
+        Akun akun = new Akun();
+        Akun akunpenerima = new Akun();
+        TarikUang tu = new TarikUang(akun.getNomorRekening());
+        SetorUang su = new SetorUang(akunpenerima.getNomorRekening());
+        try {
+        akun.setHasil(akun.getNomorRekening(),tu.GetTotalTransaksi(jumlah));
+        akunpenerima.setHasil(akunpenerima.getNomorRekening(),su.GetTotalTransaksi(jumlah));
+        }
+        catch (Exception e){    
+        }
+    }
+}
      
