@@ -19,4 +19,14 @@ public class Transfer extends Transaksi{
         super(norek);
         this.norektujuan = norektujuan;
     }
+
+      
+    /**
+     * Method getter untuk mendapatkan nilai norek tujuan
+     * @return this.norektujuan
+     */ 
+    public String getnorektujuan(){
+        return this.norektujuan;
+    }
+    
      
