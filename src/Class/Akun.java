@@ -176,4 +176,38 @@ public void isiDataAkun(String norek){
        
         String saldoBaru = String.valueOf(hasil);
 
+          Scanner scan = new Scanner(new File(path));
+        scan.useDelimiter("[,\n]");
+        
+     
+        while(scan.hasNext())
+        {
+            noRek = scan.next();
+            pin = scan.next();
+            saldo = scan.next();
+            username = scan.next();
+            noHP = scan.next();
+            email = scan.next();
+       
+            if(noRek.equals(norek)){
+                bw.write(noRek + "," + pin + "," + saldoBaru + "," + username + "," + noHP+ "," + email);
+            
+            }else{
+                bw.write(noRek + "," + pin + "," + saldo + "," + username + "," + noHP+ "," + email);
+           
+            }
+        }
+        scan.close();
+        pw.flush();
+        pw.close();
+        bw.flush();
+        bw.close();
+        fw.close();
+        fileAwal.delete();
+        
+    
+        fileTemp.renameTo(fileAwal); 
+    }
+    
+
      
