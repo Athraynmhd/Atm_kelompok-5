@@ -68,58 +68,46 @@ public class Akun
         return this.pin;
     }
     
-    public void setPin(String pinBaru) throws IOException
-    {
+    public void setPin(String pinBaru) throws IOException {
         File file = new File("DatabaseBank.txt");
-        FileReader fileReader = new FileReader(file);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
-
-        
         File temp = new File("TempDatabaseDokter.txt");
-        FileWriter fileWriter = new FileWriter(temp);
-        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-        String data = bufferedReader.readLine();
-    
-        StringTokenizer stringTokenizer = new StringTokenizer(data, ",");
-        
-        while(data != null)
-        {
-            stringTokenizer = new StringTokenizer(data, ",");
-            
-            if(noRek.equals(stringTokenizer.nextToken())){
-               
-                stringTokenizer.nextToken();
-              
-                String saldot = stringTokenizer.nextToken();
-               
-                String usernamet = stringTokenizer.nextToken();
-                
-                String noHPt = stringTokenizer.nextToken();
-               
-                String emailt = stringTokenizer.nextToken();
-             
-                bufferedWriter.write(noRek + "," + pinBaru + "," + saldot + "," + usernamet + "," + noHPt+ "," + emailt);
-            }else{
-                
-                bufferedWriter.write(data);
+        try (BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
+             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(temp))) {
+
+            String data;
+            while ((data = bufferedReader.readLine()) != null) {
+                StringTokenizer stringTokenizer = new StringTokenizer(data, ",");
+                String noRekTemp = stringTokenizer.nextToken();
+
+                if (noRek.equals(noRekTemp)) {
+                    // Skip the old pin
+                    stringTokenizer.nextToken();
+
+                    String saldot = stringTokenizer.nextToken();
+                    String usernamet = stringTokenizer.nextToken();
+                    String noHPt = stringTokenizer.nextToken();
+                    String emailt = stringTokenizer.nextToken();
+
+                    // Write the updated line with the new pin
+                    bufferedWriter.write(noRek + "," + pinBaru + "," + saldot + "," + usernamet + "," + noHPt + "," + emailt);
+                } else {
+                    // Write unchanged line
+                    bufferedWriter.write(data);
+                }
+
                 bufferedWriter.newLine();
             }
-            data = bufferedReader.readLine();
         }
-        
-        bufferedWriter.flush();
 
-        bufferedReader.close();
-        bufferedWriter.close();
-        fileReader.close();
-        fileWriter.close();
-        file.delete();
+        // Delete the original file
+        Files.deleteIfExists(file.toPath());
 
+        // Rename the temporary file to the original file
         temp.renameTo(file);
     }
 
-public void isiDataAkun(String norek){
+    public void isiDataAkun(String norek){
         String path = "DatabaseBank.txt";
         try {
   
