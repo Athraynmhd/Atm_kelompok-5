@@ -196,6 +196,39 @@ public class Akun
     
         fileTemp.renameTo(fileAwal); 
     }
+  
+    public void update(){
+        String path = "DatabaseBank.txt";
+        String temp = "TempDatabase.txt";
+        Path fileAsli = Paths.get(path);
+
+
+        File fileAwal = new File(path);
+        File fileTemp = new File(temp);
+
+
+        fileAwal.delete();
+        fileTemp.renameTo(fileAwal);
+    }
     
+   
+    public void akunBaru(ArrayList<String> dataUser)throws IOException{
+ 
+        int random = (int) (Math.random() * (1000000 - 100000)) + 100000;
+        String noRekening= Integer.toString(random);
+        
+        this.noRek = noRekening;
+
+        FileWriter filewr = new FileWriter("DatabaseBank.txt", true);
+        BufferedWriter bufferedWr = new BufferedWriter(filewr);
+        
+
+        bufferedWr.write(noRekening+ "," + dataUser.get(0) + "," + dataUser.get(1) + "," + dataUser.get(2) + "," + dataUser.get(3)+ "," + dataUser.get(4));
+        bufferedWr.newLine();
+        bufferedWr.flush();
+
+        bufferedWr.close();
+        filewr.close();
+    }
 
      
