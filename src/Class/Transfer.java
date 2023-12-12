@@ -19,8 +19,7 @@ public class Transfer extends Transaksi{
         super(norek);
         this.norektujuan = norektujuan;
     }
-
-      
+     
     /**
      * Method getter untuk mendapatkan nilai norek tujuan
      * @return this.norektujuan
@@ -28,7 +27,7 @@ public class Transfer extends Transaksi{
     public String getnorektujuan(){
         return this.norektujuan;
     }
-     
+    
      /**
       * Method getter untuk mendapatkan nilai total transaksi
       * @param jumlah
@@ -37,7 +36,11 @@ public class Transfer extends Transaksi{
     public int GetTotalTransaksi(int jumlah){
       return 0;
     }
-
+    
+    /**
+     * Method untuk mengubah nilai total transaksi di akun pengirim dan akun penerima
+     * @param jumlah 
+     */
     public void Transfer(int jumlah){
         //Memanggil method constructor tanpa parameter
         Akun akun = new Akun();
@@ -52,4 +55,3 @@ public class Transfer extends Transaksi{
         }
     }
 }
-     
