@@ -124,6 +124,7 @@ public class saldo extends javax.swing.JFrame {
      * @param evt 
      */
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
+        updateSaldo();
         home hom = new home(norek);
         hom.setVisible(true);
         dispose();
