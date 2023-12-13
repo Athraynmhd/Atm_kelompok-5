@@ -129,11 +129,12 @@ public class tariktunai extends javax.swing.JFrame {
     }//GEN-LAST:event_kembaliBtnActionPerformed
     
     //Method untuk melakukan penarikan uang
-    private void tarikBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tarikBtnActionPerformed
+    private void tarikBtnActionPerformed(java.awt.event.ActionEvent evt) {                                         
        int IndexCombo;
        String Pilihan;
        IndexCombo = PilihanTarik.getSelectedIndex();
-       Pilihan = (String)PilihanTarik.getSelectedItem();      
+       Pilihan = (String)PilihanTarik.getSelectedItem();  
+       
        
        //Memanggil method constructor tanpa parameter
        Akun akun = new Akun();
@@ -146,42 +147,26 @@ public class tariktunai extends javax.swing.JFrame {
        //Memanggil method constructor dengan parameter
        TarikUang tu = new TarikUang(norek); 
        
-       //Kondisi jika IndexCombo tidak bernilai 0
-       if(IndexCombo != 0){
-            //Kondisi jika saldo bernilai lebih besar/sama dengan pilihan
-            if(saldo - pilihan >= 0){
-                try{
-                 akun.setHasil(norek, tu.GetTotalTransaksi(pilihan));
-                } catch (Exception e){
-
-                }
+      if(IndexCombo != 0){
+        // Kondisi jika saldo bernilai lebih besar/sama dengan pilihan
+        if(saldo - pilihan >= 0){
+            try {
+                // Mengurangkan saldo pada objek akun
+                akun.setHasil(norek, tu.GetTotalTransaksi(pilihan));
+                
+                // Menampilkan pesan setelah tarik uang berhasil
                 JOptionPane.showMessageDialog(this, "Tarik uang berhasil");
-            } else {
-                JOptionPane.showMessageDialog(this, "Saldo Anda kurang!");
+            } catch (Exception e) {
+                // Handle exception jika diperlukan
             }
-       }else{
-           JOptionPane.showMessageDialog(this, "Pilihan anda salah");
-       }
-       
+        } else {
+            JOptionPane.showMessageDialog(this, "Saldo Anda kurang!");
+        }
+    } else {
+        JOptionPane.showMessageDialog(this, "Pilihan anda salah");
+    } 
        JOptionPane.showMessageDialog(this, "Tarik uang berhasil");
        PilihanTarik.setSelectedIndex(0);
-       
-       
-    }//GEN-LAST:event_tarikBtnActionPerformed
-    
-    /**
-     * Method untuk menampilkan design dari class Home
-     * ketika button "Kembali" di click
-     * @param evt 
-     */
-    private void kembaliBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_kembaliBtnMouseClicked
-        home hom = new home(norek);
-        hom.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_kembaliBtnMouseClicked
-
-    private void tarikBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tarikBtnMouseClicked
-
     }//GEN-LAST:event_tarikBtnMouseClicked
 
     /**
