@@ -143,60 +143,70 @@ public class Akun
         }
     }
 
-     public void setHasil(String norek, int hasil) throws IOException{
-        String path = "DatabaseBank.txt";
-        String temp = "TempDatabase.txt";
-     
-        File fileAwal = new File(path);
-        File fileTemp = new File(temp);
+    public void setHasil(String norek, int jumlahPenarikan) throws IOException {
+    String path = "DatabaseBank.txt";
+    String temp = "TempDatabase.txt";
 
-        FileWriter fw = new FileWriter(temp, true);
-        BufferedWriter bw = new BufferedWriter(fw);
-        
-        PrintWriter pw = new PrintWriter(bw);
-        
-        String noRek;
-        String pin;
-        String saldo;
-        String username;
-        String noHP;
-        String email;
-       
-        String saldoBaru = String.valueOf(hasil);
+    File fileAwal = new File(path);
+    File fileTemp = new File(temp);
 
-          Scanner scan = new Scanner(new File(path));
-        scan.useDelimiter("[,\n]");
-        
-     
-        while(scan.hasNext())
-        {
-            noRek = scan.next();
-            pin = scan.next();
-            saldo = scan.next();
-            username = scan.next();
-            noHP = scan.next();
-            email = scan.next();
-       
-            if(noRek.equals(norek)){
-                bw.write(noRek + "," + pin + "," + saldoBaru + "," + username + "," + noHP+ "," + email);
-            
-            }else{
-                bw.write(noRek + "," + pin + "," + saldo + "," + username + "," + noHP+ "," + email);
-           
+    FileWriter fw = new FileWriter(temp);
+    BufferedWriter bw = new BufferedWriter(fw);
+    PrintWriter pw = new PrintWriter(bw);
+
+    String noRek;
+    String pin;
+    String saldo;
+    String username;
+    String noHP;
+    String email;
+
+    Scanner scan = new Scanner(new File(path));
+    scan.useDelimiter("[,\n]");
+
+    while (scan.hasNext()) {
+        noRek = scan.next();
+        pin = scan.next();
+        saldo = scan.next();
+        username = scan.next();
+        noHP = scan.next();
+        email = scan.next();
+
+        if (noRek.equals(norek)) {
+            // Kurangkan saldo jika nomor rekening cocok
+            int saldoAwal = Integer.parseInt(saldo);
+            int saldoAkhir = saldoAwal - jumlahPenarikan;
+
+            if (saldoAkhir < 0) {
+                // Handle saldo negatif jika diperlukan
+                // Misalnya, lempar exception atau lakukan penanganan lainnya
+            } else {
+                // Tulis baris baru ke file temporary dengan saldo yang diperbarui
+                pw.println(noRek + "," + pin + "," + saldoAkhir + "," + username + "," + noHP + "," + email);
             }
+        } else {
+            // Copy baris yang sama tanpa mengubah saldo
+            pw.println(noRek + "," + pin + "," + saldo + "," + username + "," + noHP + "," + email);
         }
-        scan.close();
-        pw.flush();
-        pw.close();
-        bw.flush();
-        bw.close();
-        fw.close();
-        fileAwal.delete();
-        
-    
-        fileTemp.renameTo(fileAwal); 
     }
-  
+
+    scan.close();
+    pw.flush();
+    pw.close();
+    bw.close();
+    fw.close();
+
+    // Hapus file awal dan ganti dengan file temporary
+    if (!fileAwal.delete()) {
+        System.out.println("Gagal menghapus file awal");
+    }
+
+    if (!fileTemp.renameTo(fileAwal)) {
+        System.out.println("Gagal mengganti nama file temporary");
+    }
+}
+
+
     public void update(){
         String path = "DatabaseBank.txt";
         String temp = "TempDatabase.txt";
