@@ -240,5 +240,98 @@ public class Akun
         bufferedWr.close();
         filewr.close();
     }
+public boolean checkNoRek(String noReken,String pinen) throws IOException{
+        
+        boolean adaData = true;
+        String path = "DatabaseBank.txt";
+        try {
 
+        File file = new File(path);
+        
+        FileReader fileReader = new FileReader(file);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+               
+
+        Scanner scan = new Scanner(new File(path));
+        scan.useDelimiter("[,\\n]");
+        
+        String noReke, pine,saldoe, usernamee,noHPe,emaile;
+
+        while(scan.hasNext())
+        {
+            noReke = scan.next();
+            pine = scan.next();
+            saldoe = scan.next();
+            usernamee = scan.next();
+            noHPe = scan.next();
+            emaile = scan.next();
+
+            if(noReke.equals(noReken) && pine.equals(pinen)){
+                adaData = true;
+                break;
+            }else{
+                adaData = false;
+            }
+        }
+        bufferedReader.close();
+        scan.close();
+        fileReader.close();
+        }
+        catch (Exception e){
+            
+        }
+        return adaData;
+    }
+    
+    public boolean checkPin() throws IOException{
+        
+        boolean adaData = true;
+
+        FileReader fileR = new FileReader("DatabaseBank.txt");
+        BufferedReader bufferedR = new BufferedReader(fileR);
+        String data = bufferedR.readLine();
+        StringTokenizer stringTokenizer = new StringTokenizer(data,",");
+        
+
+        while(data != null){
+           stringTokenizer = new StringTokenizer(data.substring(6),",");
+
+           if(pin.equals(stringTokenizer.nextToken())){
+               adaData = true;
+               break;
+           }else{
+               adaData = false;
+           }
+           data = bufferedR.readLine();
+       }
+        bufferedR.close();
+        fileR.close();
+        return adaData;
+    }
+
+
+    public String getSaldo(){
+        return this.saldo;
+    }
+    
+
+    public String getUserName(){
+        return this.username;
+    }
+    
+
+    public String getNoHp(){
+        return this.noHP;
+    }
+    
+
+    public String getEmail(){
+        return this.email;
+    }
+    
+
+    public String getNomorRekening(){
+        return this.noRek;
+    }
+}
      
