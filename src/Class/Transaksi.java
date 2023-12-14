@@ -21,3 +21,36 @@ public abstract class Transaksi {
     public Transaksi(String norek){
         this.norek = norek;
     }
+/**
+     * Method getter untuk mendapatkan nilai saldo
+     * @return this.saldo
+     */
+    public int GetSaldo(){
+        return this.saldo;
+    }
+    
+    /**
+     * Method setter untuk mengatur/mengubah nilai saldo
+     * @param saldo 
+     */
+    public void SetSaldo(int saldo){
+        this.saldo = saldo;
+    }
+    
+    /**
+     * Method getter untuk mendapatkan nilai norek
+     * @return this.norek
+     */
+    public String GetNorek(){
+        return this.norek;
+    }
+    
+    /**
+     * Method abstract yang harus di override di subclassnya 
+     * dan bertujuan mendapatkan nilai total transaksi
+     * @param jumlah
+     * @return 
+     */
+    public abstract int GetTotalTransaksi(int jumlah);
+    //public abstract void setHasil(String noRek, int jumlah);
+}
